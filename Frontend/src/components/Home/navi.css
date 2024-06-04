@@ -1,0 +1,107 @@
+.nav-item:hover{
+    font-weight:600;
+    font-family: Arial, Helvetica, sans-serif;
+    color: black;
+    border-left: 2px black solid;
+    border-right: 2px black solid;
+}
+
+.selector-for-some-widget {
+    box-sizing: content-box;
+  }
+
+.nav-link{
+    font-weight: 500;
+}
+
+.mTopic{
+    font-weight: bold;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: medium;
+    font-style: italic;
+    color: black;
+    margin-left: 5px;
+    padding-top: 20px;
+    width:min-content;
+}
+
+.sec{
+    display: flex;
+    height: max-content;
+}
+
+.nav-item{
+   margin-right: 50px;
+}
+
+
+.dropdown-item{ 
+    font-size: large;
+    font-family: Arial, Helvetica, sans-serif;
+    font-style: normal; 
+    width: fit-content;
+}
+
+.dropdown-item:hover{
+    opacity: 0.9;
+}
+
+
+
+@media(max-width:980px) {
+    .dropdown-item{
+    width:100%;
+    margin-left: 0px;
+    height: 50px;
+    font-size: large;
+    justify-content: center;
+    align-items: center;
+    width: fit-content;
+  
+}
+.mnaviUp{
+    font-size:12px;
+    font-family: Arial, Helvetica, sans-serif;
+    float: left;
+}
+.mnaviUp0{
+    font-size:12px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.mTopic{
+    margin-left: 20px;
+}
+
+.dropdown-item:hover{
+    opacity: 0.5;
+}
+.sec{
+    display: block;
+    
+}
+
+
+.sec > div{
+      border-top: 2px solid rgb(26, 1, 1);
+}
+
+
+}
+
+@media(max-width:360px) {
+
+    .mnaviUp{
+        font-size:10px;
+        font-family: Arial, Helvetica, sans-serif;
+        float: left;
+    }
+    .mnaviUp0{
+        font-size:10px;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+    .text1{
+    font-family: Arial, Helvetica, sans-serif;
+    width: 50px;
+}
+}
+
