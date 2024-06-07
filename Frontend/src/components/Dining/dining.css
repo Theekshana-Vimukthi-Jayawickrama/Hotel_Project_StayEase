@@ -1,0 +1,12 @@
+@media (max-width: 360px) {
+    .textSm {
+      font-size: 16px;
+    }
+    .textSm0{
+        font-size: 17px;
+    }
+    .textSm1{
+        font-size: 28px;
+        
+    }
+}
