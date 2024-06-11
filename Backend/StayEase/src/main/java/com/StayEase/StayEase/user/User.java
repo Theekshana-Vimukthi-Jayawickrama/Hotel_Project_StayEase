@@ -1,6 +1,8 @@
 package com.StayEase.StayEase.user;
 
 
+import com.StayEase.StayEase.Room.Room;
+import com.StayEase.StayEase.Room.RoomBooking;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -39,6 +41,13 @@ public class User implements UserDetails {
 //    @JoinTable(name ="user_otp", joinColumns = {@JoinColumn(name = "fk_stu")},
 //            inverseJoinColumns = {@JoinColumn(name = "fk_otp")})
 //    private OTP otp;
+
+
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
+    List<Room> rooms;
+
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
+    List<RoomBooking> roomBookings;
 
 
     @OneToOne(cascade = CascadeType.ALL)
