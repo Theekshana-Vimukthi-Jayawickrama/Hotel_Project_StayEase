@@ -36,6 +36,8 @@ public class SecurityConfiguration {
                 .permitAll()
                 .requestMatchers("/api/v1/auth/**")
                 .permitAll()
+                .requestMatchers("api/v1/room/user/**")
+                .permitAll()
                 .requestMatchers("/api/v1/otp/**")
                 .permitAll()
                 .requestMatchers("/api/v1/admin/**")

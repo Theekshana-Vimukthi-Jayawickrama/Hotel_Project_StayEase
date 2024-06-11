@@ -1,5 +1,7 @@
 package com.StayEase.StayEase;
 
+import com.StayEase.StayEase.Room.RoomTypeRepository;
+import com.StayEase.StayEase.Room.RoomTypes;
 import com.StayEase.StayEase.user.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -15,11 +17,13 @@ public class StayEaseApplication implements CommandLineRunner {
 	private final RoleRepository roleRepository;
 	private final UserRepo userRepo;
 	private final PasswordEncoder passwordEncoder;
+	private  final RoomTypeRepository roomTypeRepository;
 
-    public StayEaseApplication(RoleRepository roleRepository, UserRepo userRepo, PasswordEncoder passwordEncoder) {
+    public StayEaseApplication(RoleRepository roleRepository, UserRepo userRepo, PasswordEncoder passwordEncoder, RoomTypeRepository roomTypeRepository) {
         this.roleRepository = roleRepository;
         this.userRepo = userRepo;
         this.passwordEncoder = passwordEncoder;
+        this.roomTypeRepository = roomTypeRepository;
     }
 
     public static void main(String[] args) {
@@ -39,6 +43,25 @@ public class StayEaseApplication implements CommandLineRunner {
 						.build();
 				roleRepository.save(userRoles);
 			}
+		}
+
+		List<String> roomType = new ArrayList<>();
+		roomType.add("Deluxe".toUpperCase().trim());
+		roomType.add(" Premier Ocean".toUpperCase().trim());
+		roomType.add("Premier Ocean Suite".toUpperCase().trim());
+		roomType.add("Specialty Suite".toUpperCase().trim());
+		roomType.add("Two Deluxe Rooms Connecting".toUpperCase().trim());
+		roomType.add("Two Premier Ocean Rooms Connecting".toUpperCase().trim());
+
+		for(String room: roomType){
+			Optional<RoomTypes> roomTypes = roomTypeRepository.findByName(room);
+			if (roomTypes.isEmpty()){
+				RoomTypes roomTypes1 = RoomTypes.builder()
+						.name(room.toUpperCase().trim())
+						.build();
+				roomTypeRepository.save(roomTypes1);
+			}
+
 		}
 
 		if(adminAccount.isEmpty()){
