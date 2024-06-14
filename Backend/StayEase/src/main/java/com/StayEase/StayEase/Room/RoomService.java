@@ -5,6 +5,8 @@ import com.StayEase.StayEase.user.UserRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -179,5 +181,87 @@ public class RoomService {
         if(room.isPresent()){
             roomRepository.delete(room.get());
         }
+    }
+
+    public void saveBooking(RoomBookingRequest roomBookingRequest, String id){
+        Optional<User> user = userRepo.findById(UUID.fromString(id));
+
+        if(user.isPresent()){
+            RoomBooking roomBooking = RoomBooking.builder()
+                    .expired(false)
+                    .processingStatus(true)
+                    .checkInDate(roomBookingRequest.getCheckInDate())
+                    .checkOutDate(roomBookingRequest.getCheckOutDate())
+                    .quantity(roomBookingRequest.getQuantity())
+                    .user(user.get())
+                    .fullName(roomBookingRequest.getFullName())
+                    .contactNo(roomBookingRequest.getContactNo())
+                    .roomType(roomBookingRequest.getRoomType())
+                    .familyName(roomBookingRequest.getFamilyName())
+                    .charge(roomBookingRequest.getCharge())
+                    .email(roomBookingRequest.getEmail())
+                    .nights(roomBookingRequest.getNights())
+                    .build();
+            roomBookingRepository.save(roomBooking);
+        }
+    }
+
+
+    public List<RoomBookingRequest> getBookingById(String id) {
+
+        Optional<User> user = userRepo.findById(UUID.fromString(id));
+        List<RoomBookingRequest> roomBookingRequest = new ArrayList<>();
+        if(user.isPresent()){
+            List<RoomBooking> roomBookings = user.get().getRoomBookings();
+
+            for(RoomBooking roomBooking : roomBookings){
+                RoomBookingRequest roomBookingRequest1 = RoomBookingRequest.builder()
+                        .charge(roomBooking.getCharge())
+                        .id(String.valueOf(roomBooking.getId()))
+                        .checkInDate(roomBooking.getCheckInDate())
+                        .checkOutDate(roomBooking.getCheckOutDate())
+                        .contactNo(roomBooking.getContactNo())
+                        .roomType(roomBooking.getRoomType())
+                        .quantity(roomBooking.getQuantity())
+                        .nights(roomBooking.getNights())
+                        .email(roomBooking.getEmail())
+                        .familyName(roomBooking.getFamilyName())
+                        .fullName(roomBooking.getFullName())
+                        .expired(roomBooking.isExpired())
+                        .processing(roomBooking.isProcessingStatus())
+                        .build();
+                roomBookingRequest.add(roomBookingRequest1);
+            }
+        }return  roomBookingRequest;
+    }
+
+    public boolean cancelRoomBooking(String id) {
+        Optional<RoomBooking> roomBooking = roomBookingRepository.findById(UUID.fromString(id));
+        if(roomBooking.isPresent()){
+            LocalDate today = LocalDate.now();
+            if(today.isBefore(roomBooking.get().getCheckInDate().minusDays(2))){
+                roomBookingRepository.delete(roomBooking.get());
+                return true;
+
+            }else{
+                return false;
+            }
+        }
+        return false;
+    }
+
+    public boolean removeRoomBooking(String id) {
+        Optional<RoomBooking> roomBooking = roomBookingRepository.findById(UUID.fromString(id));
+        if(roomBooking.isPresent()){
+            LocalDate today = LocalDate.now();
+            if(!today.isAfter(roomBooking.get().getCheckOutDate())){
+                roomBookingRepository.delete(roomBooking.get());
+                return true;
+
+            }else{
+                return false;
+            }
+        }
+        return false;
     }
 }

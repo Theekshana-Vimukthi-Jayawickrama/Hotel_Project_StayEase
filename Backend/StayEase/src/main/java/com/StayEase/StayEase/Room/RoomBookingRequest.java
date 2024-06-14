@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @AllArgsConstructor
@@ -18,6 +19,11 @@ public class RoomBookingRequest {
     private String familyName;
     private int nights;
     private double charge;
-    private Date checkInDate;
-    private Date checkOutDate;
+    private LocalDate checkInDate;
+    private LocalDate checkOutDate;
+    private String email;
+    private String contactNo;
+    private boolean expired;
+    private boolean processing;
+    private String id;
 }
