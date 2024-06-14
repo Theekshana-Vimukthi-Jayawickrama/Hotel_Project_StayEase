@@ -7,6 +7,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.UUID;
 
@@ -20,11 +21,13 @@ public class RoomBooking {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
     private String roomType;
-    private int quantity;
+    private String contactNo;
+    private String email;
+    private Integer quantity;
     private String fullName;
     private String familyName;
-    private Date checkInDate;
-    private Date checkOutDate;
+    private LocalDate checkInDate;
+    private LocalDate checkOutDate;
     private boolean processingStatus;
     private boolean expired;
     private int nights;

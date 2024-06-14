@@ -72,7 +72,7 @@ public class StayEaseApplication implements CommandLineRunner {
 					.build());
 
 			UserPersonalDetails personalDetails = UserPersonalDetails.builder()
-					.fullName("Super Admin")
+					.firstName("Super Admin")
 					.lastName("Super Admin")
 					.build();
 			User user = new User();

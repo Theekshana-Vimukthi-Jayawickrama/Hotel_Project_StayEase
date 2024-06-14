@@ -28,7 +28,7 @@ public class AuthenticationService {
     public AuthenticationResponse register(RegisterRequest request) throws Exception {
 
         var userPersonalDetails = UserPersonalDetails.builder()
-                .fullName(request.getFullName())
+                .firstName(request.getFullName())
                 .lastName(request.getLastName())
                 .build();
 
